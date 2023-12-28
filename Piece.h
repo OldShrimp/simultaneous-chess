@@ -11,7 +11,7 @@ public:
 	std::pair<int, int> getPosition() const { return pos; }
 	void update();
 	void setPosition(std::pair<int, int> p) { pos = p; _hasMoved = true; } // maybe add error checking here
-	bool hasMoved() { return _hasMoved; }
+	bool hasMoved() const { return _hasMoved; }
 	const char type;
 	const bool team;
 	const int value;

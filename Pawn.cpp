@@ -12,7 +12,7 @@ void Pawn::generateValidMoves()
 
 	int X = pos.first, Y = pos.second + direction;
 	// check for empty spaces ahead of pawn
-	if (pos.second == static_cast<int>(3.5 - 2.5 * direction)) // pawn in starting position
+	if (!hasMoved()) // pawn in starting position
 	{
 		if (state[X][Y + direction] == nullptr)
 			moves.push_back(std::pair<int, int>(X, Y + 1 * direction));

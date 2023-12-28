@@ -12,6 +12,8 @@ ChessBoard::ChessBoard()
 		new Pawn(0, std::pair<int, int>(i, 1), this);
 		new Pawn(1, std::pair<int, int>(i, BOARDSIZE - 2), this);
 	}
+	new King(0, std::pair<int, int>(4, 0), this);
+	new King(1, std::pair<int, int>(4, BOARDSIZE - 1), this);
 	// add other pieces once implemented
 
 	updatePieces();
@@ -124,7 +126,7 @@ void ChessBoard::nextTurn()
 {
 	std::vector<Piece*> to_delete;
 	auto piece_removal = [&to_delete](Piece* p) { if (std::find(to_delete.begin(), to_delete.end(), p) == to_delete.end()) to_delete.push_back(p); };
-	history.push_back(currentTurn);
+	
 	auto p1 = board[currentTurn.p1_origin.first][currentTurn.p1_origin.second], p2 = board[currentTurn.p2_origin.first][currentTurn.p2_origin.second];
 	// pieces move immediately
 	board[currentTurn.p1_origin.first][currentTurn.p1_origin.second] = nullptr;
@@ -163,6 +165,7 @@ void ChessBoard::nextTurn()
 	for (auto& i : to_delete)
 		delete i;
 
+	history.push_back(currentTurn);
 	currentTurn = turn();
 
 	updatePieces();
