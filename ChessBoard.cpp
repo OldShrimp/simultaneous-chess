@@ -14,10 +14,16 @@ ChessBoard::ChessBoard()
 	}
 	new King(0, std::pair<int, int>(4, 0), this);
 	new King(1, std::pair<int, int>(4, BOARDSIZE - 1), this);
+	new Queen(0, std::pair<int, int>(3, 0), this);
+	new Queen(1, std::pair<int, int>(3, BOARDSIZE - 1), this);
 	new Rook(0, std::pair<int, int>(0, 0), this);
 	new Rook(0, std::pair<int, int>(BOARDSIZE - 1, 0), this);
 	new Rook(1, std::pair<int, int>(0, BOARDSIZE - 1), this);
 	new Rook(1, std::pair<int, int>(BOARDSIZE - 1, BOARDSIZE - 1), this);
+	new Bishop(0, std::pair<int, int>(2, 0), this);
+	new Bishop(0, std::pair<int, int>(5, 0), this);
+	new Bishop(1, std::pair<int, int>(2, BOARDSIZE - 1), this);
+	new Bishop(1, std::pair<int, int>(5, BOARDSIZE - 1), this);
 	// add other pieces once implemented
 
 	updatePieces();
