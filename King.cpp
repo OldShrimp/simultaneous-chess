@@ -32,6 +32,7 @@ void King::generateValidMoves()
 					validMoves.push_back(std::make_pair(2, pos.second));
 			}
 		}
+		rookpos.first = BOARDSIZE - 1;
 		if (is_occupied(rookpos) && !state[rookpos.first][rookpos.second]->hasMoved()) // right side
 		{
 			if (!is_occupied(std::make_pair(5, pos.second)) && !is_occupied(std::make_pair(6, pos.second)))
@@ -45,7 +46,7 @@ void King::generateValidMoves()
 				temp6[6][pos.second] = this;
 
 				if (!board->checkCheck(temp5, team) && !board->checkCheck(temp6, team))
-					validMoves.push_back(std::make_pair(2, pos.second));
+					validMoves.push_back(std::make_pair(6, pos.second));
 			}
 		}
 	}

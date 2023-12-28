@@ -14,6 +14,10 @@ ChessBoard::ChessBoard()
 	}
 	new King(0, std::pair<int, int>(4, 0), this);
 	new King(1, std::pair<int, int>(4, BOARDSIZE - 1), this);
+	new Rook(0, std::pair<int, int>(0, 0), this);
+	new Rook(0, std::pair<int, int>(BOARDSIZE - 1, 0), this);
+	new Rook(1, std::pair<int, int>(0, BOARDSIZE - 1), this);
+	new Rook(1, std::pair<int, int>(BOARDSIZE - 1, BOARDSIZE - 1), this);
 	// add other pieces once implemented
 
 	updatePieces();
@@ -144,9 +148,29 @@ void ChessBoard::nextTurn()
 			piece_removal(board[currentTurn.p1_destination.first][currentTurn.p1_destination.second]);
 		// en passent logic
 		else if (p1->type == 'p' && currentTurn.p1_origin.first != currentTurn.p1_destination.first && board[currentTurn.p1_destination.first][currentTurn.p1_origin.second] != nullptr)
+		{
 			if (board[currentTurn.p1_destination.first][currentTurn.p1_origin.second]->type == 'p'
 				&& board[currentTurn.p1_destination.first][currentTurn.p1_origin.second]->team != p1->team) // possible false positive in some cases
 				piece_removal(board[currentTurn.p1_destination.first][currentTurn.p1_origin.second]);
+		}
+		// castle move
+		else if (p1->type == 'k')
+		{
+			if (p1->getPosition().first - currentTurn.p1_destination.first == 2) // left castle
+			{
+				auto rook = board[0][p1->getPosition().second];
+				board[0][p1->getPosition().second] = nullptr;
+				rook->setPosition(std::make_pair(p1->getPosition().first - 1, p1->getPosition().second));
+				board[rook->getPosition().first][rook->getPosition().second] = rook;
+			}
+			else if (p1->getPosition().first - currentTurn.p1_destination.first == -2) // right castle
+			{
+				auto rook = board[BOARDSIZE - 1][p1->getPosition().second];
+				board[BOARDSIZE - 1][p1->getPosition().second] = nullptr;
+				rook->setPosition(std::make_pair(p1->getPosition().first + 1, p1->getPosition().second));
+				board[rook->getPosition().first][rook->getPosition().second] = rook;
+			}
+		}
 		board[currentTurn.p1_destination.first][currentTurn.p1_destination.second] = p1;
 		p1->setPosition(currentTurn.p1_destination);
 
@@ -155,9 +179,29 @@ void ChessBoard::nextTurn()
 			piece_removal(board[currentTurn.p2_destination.first][currentTurn.p2_destination.second]);
 		// en passent logic
 		else if (p2->type == 'p' && currentTurn.p2_origin.first != currentTurn.p2_destination.first && board[currentTurn.p2_destination.first][currentTurn.p2_origin.second] != nullptr)
+		{
 			if (board[currentTurn.p2_destination.first][currentTurn.p2_origin.second]->type == 'p'
 				&& board[currentTurn.p2_destination.first][currentTurn.p2_origin.second]->team != p2->team) // possible false positive in some cases
 				piece_removal(board[currentTurn.p2_destination.first][currentTurn.p2_origin.second]);
+		}
+		// castle move
+		else if (p2->type == 'k')
+		{
+			if (p2->getPosition().first - currentTurn.p2_destination.first == 2) // left castle
+			{
+				auto rook = board[0][p2->getPosition().second];
+				board[0][p2->getPosition().second] = nullptr;
+				rook->setPosition(std::make_pair(p2->getPosition().first - 1, p2->getPosition().second));
+				board[rook->getPosition().first][rook->getPosition().second] = rook;
+			}
+			else if (p2->getPosition().first - currentTurn.p2_destination.first == -2) // right castle
+			{
+				auto rook = board[BOARDSIZE - 1][p2->getPosition().second];
+				board[BOARDSIZE - 1][p2->getPosition().second] = nullptr;
+				rook->setPosition(std::make_pair(p2->getPosition().first + 1, p2->getPosition().second));
+				board[rook->getPosition().first][rook->getPosition().second] = rook;
+			}
+		}
 		board[currentTurn.p2_destination.first][currentTurn.p2_destination.second] = p2;
 		p2->setPosition(currentTurn.p2_destination);
 	}
@@ -178,6 +222,8 @@ void ChessBoard::updatePieces()
 		for (int j = 0; j < BOARDSIZE; j++)
 		{
 			if (board[i][j] != nullptr)
+			{
 				board[i][j]->update();
+			}
 		}
 }

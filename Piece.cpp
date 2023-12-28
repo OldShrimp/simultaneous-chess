@@ -56,5 +56,5 @@ bool Piece::is_occupied(std::pair<int, int> p)
 
 bool Piece::is_enemy(std::pair<int, int> p) 
 {
-	return board->getBoardState()[p.first][p.second]->team != team;
+	return board->getBoardState()[p.first][p.second]->team != this->team;
 }
