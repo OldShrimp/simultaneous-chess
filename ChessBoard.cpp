@@ -117,6 +117,7 @@ void ChessBoard::nextTurn()
 	}
 	else // simply do each move, destroying pieces at destination tile if needed
 	{
+		// player 1's move
 		if (board[currentTurn.p1_destination.first][currentTurn.p1_destination.second] != nullptr)
 			piece_removal(board[currentTurn.p1_destination.first][currentTurn.p1_destination.second]);
 		// en passent logic
@@ -127,6 +128,7 @@ void ChessBoard::nextTurn()
 		board[currentTurn.p1_destination.first][currentTurn.p1_destination.second] = p1;
 		p1->setPosition(currentTurn.p1_destination);
 
+		// player 2's move
 		if (board[currentTurn.p2_destination.first][currentTurn.p2_destination.second] != nullptr)
 			piece_removal(board[currentTurn.p2_destination.first][currentTurn.p2_destination.second]);
 		// en passent logic

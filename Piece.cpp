@@ -24,5 +24,21 @@ void Piece::update()
 	{
 		lastUpdate = board->getTurnCount();
 		generateValidMoves();
+		checkValidation();
 	}
+}
+
+void Piece::checkValidation()
+{
+	std::vector<std::pair<int, int>> moves;
+	for (auto& m : validMoves)
+	{
+		auto bState = board->getBoardState(); // check effect this move has on the board
+		bState[pos.first][pos.second] = nullptr;
+		bState[m.first][m.second] = this;
+
+		if (!board->checkCheck(bState, team)) // cannot put own king in check
+			moves.push_back(m);
+	}
+	validMoves = moves;
 }

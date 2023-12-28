@@ -20,5 +20,6 @@ protected:
 	std::vector<std::pair<int, int>> validMoves;
 	class ChessBoard* board;
 	virtual void generateValidMoves() = 0;
+	void checkValidation();
 };
 #endif

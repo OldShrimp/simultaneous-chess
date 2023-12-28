@@ -46,5 +46,6 @@ void Pawn::generateValidMoves()
 		else if (lastMove.p1_destination.first == X + 1 && state[X + 1][Y]->type == 'p')
 			moves.push_back(std::pair<int, int>(X + 1, Y + direction));
 	}
+
 	validMoves = moves;
 }
