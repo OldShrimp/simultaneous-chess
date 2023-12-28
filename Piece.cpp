@@ -2,7 +2,8 @@
 #include "ChessBoard.h"
 #include <iostream>
 
-Piece::Piece(char _type, int _value, bool _team, std::pair<int, int> _pos, ChessBoard* _board) : type(_type), value(_value), team(_team), pos(_pos), board(_board) , lastUpdate(-1)
+Piece::Piece(char _type, int _value, bool _team, std::pair<int, int> _pos, ChessBoard* _board)
+	: type(_type), value(_value), team(_team), pos(_pos), board(_board) , lastUpdate(-1), _hasMoved(false)
 {
 	board->addPiece(this);
 	std::cout << "piece " << type << " created at " << pos.first << ',' << pos.second << '\n';
