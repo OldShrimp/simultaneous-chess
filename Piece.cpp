@@ -43,3 +43,18 @@ void Piece::checkValidation()
 	}
 	validMoves = moves;
 }
+
+bool Piece::in_bounds(std::pair<int, int> p)
+{
+	return p.first >= 0 && p.first < BOARDSIZE && p.second >= 0 && p.second < BOARDSIZE; 
+}
+
+bool Piece::is_occupied(std::pair<int, int> p)
+{
+	return board->getBoardState()[p.first][p.second] != nullptr; 
+}
+
+bool Piece::is_enemy(std::pair<int, int> p) 
+{
+	return board->getBoardState()[p.first][p.second]->team != team;
+}

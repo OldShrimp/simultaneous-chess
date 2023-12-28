@@ -3,5 +3,5 @@
 
 #include "Pawn.h"
 #include "King.h"
-
+#include "Rook.h"
 #endif // !ChessPieces_H

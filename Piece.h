@@ -23,5 +23,8 @@ protected:
 	class ChessBoard* board;
 	virtual void generateValidMoves() = 0;
 	void checkValidation();
+	bool in_bounds(std::pair<int, int> p);
+	bool is_occupied(std::pair<int, int> p);
+	bool is_enemy(std::pair<int, int> p);
 };
 #endif
