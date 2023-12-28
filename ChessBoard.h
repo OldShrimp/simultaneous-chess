@@ -17,7 +17,8 @@ public:
 	int getScore(bool t) { return t ? scores.second : scores.first; }
 
 	std::vector<std::vector<const Piece*>> getBoardState();
-	std::vector<std::pair<int, int>> checkCheck(bool);
+	bool checkCheck(bool);
+	bool checkCheck(std::vector<std::vector<const Piece*>>, bool);
 
 	struct turn // maybe use a pair of single-player turns to clean up some if-statements using get
 	{

@@ -92,11 +92,31 @@ std::vector<std::vector<const Piece*>> ChessBoard::getBoardState()
 	return boardstate;
 }
 
-std::vector<std::pair<int, int>> ChessBoard::checkCheck(bool t)
+bool ChessBoard::checkCheck(bool t)
 {
-	// find all pieces that threaten the king, then return their positions
-	std::vector<std::pair<int, int>> r;
-	return r;
+	return checkCheck(getBoardState(), t);
+}
+
+bool ChessBoard::checkCheck(std::vector<std::vector<const Piece*>> state, bool t)
+{
+	// find the king
+	std::pair<int, int> kpos;
+	for (auto& i : state)
+		for (auto& j : i)
+			if (j != nullptr && j->type == 'k' && j->team == t)
+			{
+				kpos = j->getPosition(); // could optimize for kings found early
+			}
+	// return true if any piece threatens the king
+	for (auto& i : state)
+		for (auto& j : i)
+			if (j != nullptr && j->team != t)
+			{
+				auto m = j->getValidMoves();
+				if (std::find(m.begin(), m.end(), kpos) != m.end())
+					return true;
+			}
+	return false;
 }
 
 
