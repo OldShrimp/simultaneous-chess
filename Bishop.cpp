@@ -17,12 +17,12 @@ void Bishop::generateValidMoves()
 		{
 			if (in_bounds(dest))
 			{
-				if (is_occupied(dest) && is_enemy(dest)) // stop after hitting an enemy
+				if (!is_occupied(dest)) // stop after hitting an enemy
 				{
 					validMoves.push_back(dest);
 					break;
 				}
-				else if (!is_occupied(dest))
+				else if (is_enemy(dest))
 					validMoves.push_back(dest);
 				else
 					break;

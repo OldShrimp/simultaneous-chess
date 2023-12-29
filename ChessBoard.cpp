@@ -24,7 +24,11 @@ ChessBoard::ChessBoard()
 	new Bishop(0, std::pair<int, int>(5, 0), this);
 	new Bishop(1, std::pair<int, int>(2, BOARDSIZE - 1), this);
 	new Bishop(1, std::pair<int, int>(5, BOARDSIZE - 1), this);
-	// add other pieces once implemented
+	new Knight(0, std::pair<int, int>(1, 0), this);
+	new Knight(0, std::pair<int, int>(6, 0), this);
+	new Knight(1, std::pair<int, int>(1, BOARDSIZE - 1), this);
+	new Knight(1, std::pair<int, int>(6, BOARDSIZE - 1), this);
+
 
 	updatePieces();
 

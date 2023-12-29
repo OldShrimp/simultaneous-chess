@@ -6,4 +6,5 @@
 #include "Rook.h"
 #include "Queen.h"
 #include "Bishop.h"
+#include "Knight.h"
 #endif // !ChessPieces_H
